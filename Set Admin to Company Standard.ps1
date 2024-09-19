@@ -10,6 +10,7 @@ $list = @(Get-WmiObject -Class Win32_UserAccount -Filter 'LocalAccount=true' | S
 #Loops through the list to determine if <NEW ADMIN NAME> is already present, and will add it to the Administrators group
 If ($list.name -contains "<NEW ADMIN NAME>") {
     Add-LocalGroupMember -Group "Administrators" -Member "<NEW ADMIN NAME>"
+    Set-localuser -Name "<NEW ADMIN NAME>" -Password $SecurePassword -ErrorAction SilentlyContinue
     Continue
 
 } else { 
